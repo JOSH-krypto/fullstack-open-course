@@ -1,57 +1,30 @@
-const Header = (props) => {
-  console.log(props)
-  return (
-    <h1>{props.course}</h1>
-  )
-}
-const Part = (props) => {
-  return (
-    <p>{props.part} {props.exercises}</p>
-  )
-}
-const Content = (props) => {
-  return (
-    <div>
-      <Part part={props.part1.name} exercises={props.part1.exercises} />
-      <Part part={props.part2.name} exercises={props.part2.exercises} />
-      <Part part={props.part3.name} exercises={props.part3.exercises} />
+import { useState } from 'react'
 
-    </div>
-  )
-}
-const Total = (props) => {
-  return (
-    <p>Number of exercises {props.part1.exercises + props.part2.exercises + props.part3.exercises}</p>
-  )
-}
 const App = () => {
-  const course = 'Half Stack application development'
-  const part1 ={
-    name:'Fundamentals of React',
-    exercises: 10
-    }
-  const part2 = {
-    name:'Using props to pass data',
-    exercises: 7
+  const anecdotes = [
+    'If it hurts, do it more often.',
+    'Adding manpower to a late software project makes it later!',
+    'The first 90 percent of the code accounts for the first 90 percent...',
+    'Any fool can write code that a computer can understand.',
+    'Premature optimization is the root of all evil.',
+    'Debugging is twice as hard as writing the code in the first place.',
+    'Programming without an extremely heavy use of console.log...',
+    'The only way to go fast, is to go well.'
+  ]
+
+  const [selected, setSelected] = useState(0)
+  const nextAnecdote = () => {
+    setSelected(Math.floor(Math.random() * anecdotes.length))
   }
-  const part3 = {
-    name:'State of a component',
-   exercises: 14
-  }
+
   return (
     <div>
-      <Header course={course} />
-      <Content
-        part1={part1} 
-        part2={part2} 
-        part3={part3} 
-      />
-      <Total
-        part1={part1} 
-        part2={part2} 
-        part3={part3} 
-      />
+      <p>{anecdotes[selected]}</p>
+
+      <button onClick={nextAnecdote}>next anecdote</button>
     </div>
   )
 }
+
 export default App
+
